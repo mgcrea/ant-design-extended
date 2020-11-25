@@ -1,0 +1,93 @@
+import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs/blocks";
+import { DatePicker } from "./..";
+import { Block } from "src/stories/components";
+import { useState } from "react";
+import { storybookSizeArgTypes } from "src/utils";
+
+<Meta title="antd-ex/DatePicker" component={DatePicker} argTypes={argTypes} />
+
+export const argTypes = {
+  ...storybookSizeArgTypes,
+  type: {
+    control: {
+      type: "inline-radio",
+      options: ["default", "primary", "secondary", "dashed", "ghost", "text"],
+    },
+  },
+};
+
+# DatePicker
+
+## Universal Time
+
+A new prop `utc` allows you to always manipulate [Coordinated Universal Time](https://en.wikipedia.org/wiki/Coordinated_Universal_Time) values:
+
+<Canvas>
+  <Story name="Universal Time" argTypes={{ type: { control: { type: null } } }}>
+    {(args) => {
+      console.count("render");
+      const [firstValue, setFirstValue] = useState();
+      const [secondValue, setSecondValue] = useState();
+      return (
+        <Block direction="column">
+          <small>without utc</small>
+          <DatePicker onChange={setFirstValue} {...args} />
+          <small>value={firstValue ? `"${firstValue.toISOString()}"` : "undefined"}</small>
+          <small style={{ marginTop: "1em" }}>with utc</small>
+          <DatePicker onChange={setSecondValue} utc {...args} />
+          <small>value={secondValue ? `"${secondValue.toISOString()}"` : "undefined"}</small>
+        </Block>
+      );
+    }}
+  </Story>
+</Canvas>
+
+<ArgsTable of={DatePicker} include={["utc"]} />
+
+## Start of Time
+
+A new prop `startOf` allows you to sanitize your dates using moment [Start of Time](https://momentjs.com/docs/#/manipulating/start-of/) helper:
+
+**Breaking change** We did set the default value to `day`
+
+<Canvas>
+  <Story name="Start of Time" argTypes={{ type: { control: { type: null } } }}>
+    {(args) => {
+      console.count("render");
+      const [firstValue, setFirstValue] = useState();
+      const [secondValue, setSecondValue] = useState();
+      return (
+        <Block direction="column">
+          <small>startOf="second" (antd default)</small>
+          <DatePicker onChange={setFirstValue} {...args} startOf="second" />
+          <small>value={firstValue ? `"${firstValue.toISOString()}"` : "undefined"}</small>
+          <small style={{ marginTop: "1em" }}>startOf="day" (antd-ex default) + utc</small>
+          <DatePicker onChange={setSecondValue} {...args} startOf="day" utc />
+          <small>value={secondValue ? `"${secondValue.toISOString()}"` : "undefined"}</small>
+        </Block>
+      );
+    }}
+  </Story>
+</Canvas>
+
+<ArgsTable of={DatePicker} include={["startOf"]} />
+
+## Sizes
+
+New sizes are available: `x-small`, `x-large`:
+
+<Canvas>
+  <Story name="Sizes" argTypes={{ size: { control: { type: null } } }}>
+    {(args) => (
+      <Block>
+        <DatePicker size="x-small" {...args} />
+        <DatePicker size="small" {...args} />
+        <DatePicker {...args} />
+        <DatePicker size="large" {...args} />
+        <DatePicker size="x-large" {...args} />
+      </Block>
+    )}
+  </Story>
+</Canvas>
+
+<ArgsTable of={DatePicker} include={["size"]} />
