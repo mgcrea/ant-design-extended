@@ -1,0 +1,83 @@
+import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs/blocks";
+import { Button } from "./..";
+import { Block } from "src/stories/components";
+import { storybookSizeArgTypes } from "src/utils";
+
+<Meta title="antd-ex/Button" component={Button} argTypes={argTypes} />
+
+export const argTypes = {
+  ...storybookSizeArgTypes,
+  type: {
+    control: {
+      type: "inline-radio",
+      options: ["default", "primary", "secondary", "dashed", "ghost", "text"],
+    },
+  },
+};
+
+# Button
+
+## Sizes
+
+New sizes are available: `x-small`, `x-large`:
+
+<Canvas>
+  <Story name="Sizes" argTypes={{ size: { control: { type: null } } }}>
+    {(args) => (
+      <Block>
+        <Button size="x-small" {...args}>
+          x-small
+        </Button>
+        <Button size="small" {...args}>
+          small
+        </Button>
+        <Button {...args}>medium</Button>
+        <Button size="large" {...args}>
+          large
+        </Button>
+        <Button size="x-large" {...args}>
+          x-large
+        </Button>
+      </Block>
+    )}
+  </Story>
+</Canvas>
+
+<ArgsTable of={Button} include={["size"]} />
+
+## Types
+
+New types are available: `secondary`
+
+<Canvas>
+  <Story name="Types" argTypes={{ type: { control: { type: null } } }}>
+    {(args) => (
+      <Block>
+        <Button type="default" {...args}>
+          default
+        </Button>
+        <Button type="primary" {...args}>
+          primary
+        </Button>
+        <Button type="secondary" {...args}>
+          secondary
+        </Button>
+        <Button type="dashed" {...args}>
+          dashed
+        </Button>
+        <Button type="ghost" {...args}>
+          ghost
+        </Button>
+        <Button type="text" {...args}>
+          text
+        </Button>
+      </Block>
+    )}
+  </Story>
+</Canvas>
+
+<ArgsTable of={Button} include={["type"]} />
+
+### Props
+
+<ArgsTable of={Button} />
