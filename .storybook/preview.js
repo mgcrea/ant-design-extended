@@ -1,3 +1,5 @@
+import { PARAM_KEY as docsViewId } from "@storybook/addon-docs/dist/shared";
+
 // import React from "react";
 
 // export const decorators = [
@@ -10,4 +12,5 @@
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
+  viewMode: docsViewId,
 };

@@ -1,0 +1,89 @@
+import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs/blocks";
+import { Checkbox, CheckboxGroup, CheckboxButton } from "./..";
+import { Block } from "src/stories/components";
+import { storybookSizeArgTypes } from "src/utils";
+
+<Meta title="antd-ex/Checkbox" component={Checkbox} argTypes={argTypes} />
+
+export const argTypes = {
+  ...storybookSizeArgTypes,
+  onChange: { action: "changed" },
+  layout: {
+    control: {
+      type: "inline-radio",
+      options: ["horizontal", "vertical"],
+    },
+  },
+};
+
+export const options = [
+  { label: "Apple", value: "apple" },
+  { label: "Pear", value: "pear" },
+  { label: "Orange", value: "orange" },
+];
+
+export const CheckboxButtonGroupTemplate = (props) => (
+  <CheckboxGroup defaultValue={["apple"]} {...props}>
+    <CheckboxButton value="apple">Apple</CheckboxButton>
+    <CheckboxButton value="pear">Pear</CheckboxButton>
+    <CheckboxButton value="orange">Orange</CheckboxButton>
+  </CheckboxGroup>
+);
+
+# Checkbox
+
+## Button
+
+A new `Checkbox.Button` component is available to bring button styles to checkboxes
+
+<Canvas>
+  <Story name="Button" argTypes={{ size: { control: { type: null } } }}>
+    {(args) => (
+      <Block>
+        <Checkbox.Button value="apple">Apple</Checkbox.Button>
+      </Block>
+    )}
+  </Story>
+</Canvas>
+
+## Sizes
+
+`<Checkbox.Group />` does support a new `size` prop that matches the `SizeProps` of the extended `<Button />` component.
+
+<Canvas>
+  <Story name="Sizes" argTypes={{ size: { control: { type: null } } }}>
+    {(args) => (
+      <Block direction="column">
+        <small>x-small</small>
+        {CheckboxButtonGroupTemplate({ ...args, size: "x-small" })}
+        <small style={{ marginTop: "1em" }}>small</small>
+        {CheckboxButtonGroupTemplate({ ...args, size: "small" })}
+        <small style={{ marginTop: "1em" }}>medium</small>
+        {CheckboxButtonGroupTemplate({ ...args, size: "medium" })}
+        <small style={{ marginTop: "1em" }}>large</small>
+        {CheckboxButtonGroupTemplate({ ...args, size: "large" })}
+        <small style={{ marginTop: "1em" }}>x-large</small>
+        {CheckboxButtonGroupTemplate({ ...args, size: "x-large" })}
+      </Block>
+    )}
+  </Story>
+</Canvas>
+
+## Layouts
+
+`<Checkbox.Group />` does support a new `layout` prop
+
+<Canvas>
+  <Story name="Layouts" argTypes={{ layout: { control: { type: null } } }}>
+    {(args) => (
+      <Block direction="column">
+        <small>horizontal</small>
+        {CheckboxButtonGroupTemplate({ ...args, layout: "horizontal" })}
+        <small style={{ marginTop: "1em" }}>vertical</small>
+        {CheckboxButtonGroupTemplate({ ...args, layout: "vertical" })}
+      </Block>
+    )}
+  </Story>
+</Canvas>
+
+<ArgsTable of={CheckboxGroup} />

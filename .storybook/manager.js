@@ -12,7 +12,12 @@ addons.setConfig({
   // enableShortcuts: true,
   // isToolshown: false,
   theme: antDesignTheme,
-  // selectedPanel: undefined,
-  // initialActive: "sidebar",
+  selectedPanel: "storybook/docs/panel",
+  initialActive: "storybook/docs/panel",
   // showRoots: false,
+  previewTabs: {
+    // the order of the tabs is configured by the order here
+    "storybook/docs/panel": null,
+    canvas: null,
+  },
 });
